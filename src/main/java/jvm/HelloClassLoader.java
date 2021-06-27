@@ -8,17 +8,16 @@ import java.lang.reflect.Method;
 import java.util.Base64;
 
 public class HelloClassLoader extends ClassLoader{
+    String path="C:\\Users\\paul\\Downloads\\aaa\\Hello.xlass";
     @Override
     protected Class<?> findClass(String name) throws ClassNotFoundException {
-        //String helloBase64= new Base64Util().readFile2Base64(path);
-        String helloBase64="yv66vgAAADQAHAoABgAOCQAPABAIABEKABIAEwcAFAcAFQEABjxpbml0PgEAAygpVgEABENvZGUB\n" +
-                "AA9MaW5lTnVtYmVyVGFibGUBAAVoZWxsbwEAClNvdXJjZUZpbGUBAApIZWxsby5qYXZhDAAHAAgH\n" +
-                "ABYMABcAGAEAE0hlbGxvLCBjbGFzc0xvYWRlciEHABkMABoAGwEABUhlbGxvAQAQamF2YS9sYW5n\n" +
-                "L09iamVjdAEAEGphdmEvbGFuZy9TeXN0ZW0BAANvdXQBABVMamF2YS9pby9QcmludFN0cmVhbTsB\n" +
-                "ABNqYXZhL2lvL1ByaW50U3RyZWFtAQAHcHJpbnRsbgEAFShMamF2YS9sYW5nL1N0cmluZzspVgAh\n" +
-                "AAUABgAAAAAAAgABAAcACAABAAkAAAAdAAEAAQAAAAUqtwABsQAAAAEACgAAAAYAAQAAAAEAAQAL\n" +
-                "AAgAAQAJAAAAJQACAAEAAAAJsgACEgO2AASxAAAAAQAKAAAACgACAAAABAAIAAUAAQAMAAAAAgAN";
+        String helloBase64= new Base64Util().readFile2Base64(path);
         byte[] bytes=decode(helloBase64);
+        int i=0;
+        for (byte a: bytes){
+            bytes[i]= (byte) (255-a);
+            i++;
+        }
         return defineClass(name,bytes,0,bytes.length);
     }
 
